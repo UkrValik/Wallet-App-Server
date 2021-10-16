@@ -16,7 +16,7 @@ app.get('/test', (req, res) => {
 });
 
 app.get('/env', (req, res) => {
-    res.json({environment: process.env.ENVIRONMENT});
+    res.json({environment: process.env.NODE_ENV});
 });
 
 app.listen(process.env.PORT, () => {

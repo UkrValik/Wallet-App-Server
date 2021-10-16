@@ -15,6 +15,10 @@ app.get('/test', (req, res) => {
     res.send("Hello! It's a test feature");
 });
 
+app.get('/env', (req, res) => {
+    res.json({environment: process.env.ENVIRONMENT});
+});
+
 app.listen(process.env.PORT, () => {
     console.log('Running on port ' + process.env.PORT);
 });

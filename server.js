@@ -5,19 +5,14 @@ const express = require('express');
 
 const app = express();
 
-console.log(process.env.NODE_ENV);
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
-app.get('/', (req, res) => {
-    res.send('Hello, world!');
-});
+const authRouter = require('./src/auth/controller.js');
+const userRouter = require('./src/user/controller.js');
 
-app.get('/test', (req, res) => {
-    res.send("Hello! It's a test feature");
-});
-
-app.get('/env', (req, res) => {
-    res.json({environment: process.env.NODE_ENV});
-});
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
 
 app.listen(process.env.PORT, () => {
     console.log('Running on port ' + process.env.PORT);

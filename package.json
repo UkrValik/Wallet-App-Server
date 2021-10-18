@@ -1,6 +1,6 @@
 {
   "name": "wallet-app-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1009.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "dynamoose": "^2.8.2",
+    "express": "^4.17.1",
+    "uuid": "^8.3.2",
+    "validator": "^13.6.0"
   }
 }

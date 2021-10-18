@@ -24,7 +24,12 @@ class User {
             },
         });
 
-        this.User = dynamoose.model('User', userSchema);
+        let modelName = 'users';
+        if (process.env.NODE_ENV === 'development') {
+            modelName += '-dev'
+        }
+
+        this.User = dynamoose.model(modelName, userSchema);
     }
 
     create(user) {

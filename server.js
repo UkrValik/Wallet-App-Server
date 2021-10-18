@@ -3,10 +3,12 @@
 require('dotenv').config();
 const express = require('express');
 
+const app = express();
+
+app.use(express.json());
+
 const authRouter = require('./src/auth/controller.js');
 const userRouter = require('./src/user/controller.js');
-
-const app = express();
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);

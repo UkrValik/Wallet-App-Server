@@ -1,11 +1,11 @@
 'use strict';
 
-const argon2 = require('argon2');
+const bcrypt = require('bcrypt');
 
 const userService = require('../user/service.js');
 
 const register = async (req, res) => {
-    req.body.password = argon2.hash(req.body.password);
+    req.body.password = await bcrypt.hash(req.body.password, 10);
     const savedUser = userService.createUser(req.body);
     res.json(savedUser);
 }

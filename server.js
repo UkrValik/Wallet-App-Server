@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
 const authRouter = require('./src/auth/controller.js');
 const userRouter = require('./src/user/controller.js');

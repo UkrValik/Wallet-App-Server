@@ -10,6 +10,11 @@ const register = async (req, res) => {
     res.json(savedUser);
 }
 
+const login = async (req, res) => {
+    console.log(req.user);
+}
+
 module.exports = {
     register,
+    login,
 };

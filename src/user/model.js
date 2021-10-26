@@ -40,6 +40,10 @@ class User {
     findById(id) {
         return this.User.get(id);
     }
+
+    findByEmail(email) {
+        return this.User.query('email').eq(email);
+    }
 }
 
 module.exports = new User();

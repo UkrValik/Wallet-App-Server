@@ -2,14 +2,31 @@
 
 require('dotenv').config();
 const express = require('express');
-
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const authRouter = require('./src/auth/controller.js');
 const userRouter = require('./src/user/controller.js');
+const localAuthStrategy = require('./src/auth/strategy.local.js');
+
+const app = express();
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+  
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.use('local', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+}, localAuthStrategy));
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use(passport.initialize());
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);

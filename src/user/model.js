@@ -42,7 +42,7 @@ class User {
     }
 
     findByEmail(email) {
-        return this.User.query('email').eq(email);
+        return this.User.scan('email').eq(email);
     }
 }
 

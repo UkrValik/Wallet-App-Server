@@ -1,6 +1,8 @@
 'use strict';
 
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 const userService = require('../user/service.js');
 
@@ -11,7 +13,10 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    console.log(req.user);
+    res.json({
+        success: true,
+        token: jwt.sign({ id: req.user.id }, process.env.JWT_SECRET),
+    });
 }
 
 module.exports = {

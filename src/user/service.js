@@ -11,11 +11,17 @@ const findById = (userId) => {
 }
 
 const findByEmail = (userEmail) => {
-    return User.findByEmail(userEmail);
+    return User.findByEmail(userEmail).exec();
+}
+
+const getUser = (req, res) => {
+    req.user.password = undefined;
+    res.json(req.user);
 }
 
 module.exports = {
     createUser,
     findById,
     findByEmail,
+    getUser,
 };

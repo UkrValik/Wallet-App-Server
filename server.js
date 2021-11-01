@@ -4,10 +4,13 @@ require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const JWTStrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const authRouter = require('./src/auth/controller.js');
 const userRouter = require('./src/user/controller.js');
 const localAuthStrategy = require('./src/auth/strategy.local.js');
+const jwtAuthStrategy = require('./src/auth/strategy.jwt.js');
 
 const app = express();
 
@@ -23,6 +26,11 @@ passport.use('local', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
 }, localAuthStrategy));
+
+passport.use('jwt', new JWTStrategy({
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.JWT_SECRET,
+}, jwtAuthStrategy));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))

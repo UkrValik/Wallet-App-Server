@@ -9,6 +9,7 @@ const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const authRouter = require('./src/auth/controller.js');
 const userRouter = require('./src/user/controller.js');
+const walletRouter = require('./src/wallet/controller.js');
 const localAuthStrategy = require('./src/auth/strategy.local.js');
 const jwtAuthStrategy = require('./src/auth/strategy.jwt.js');
 
@@ -38,6 +39,7 @@ app.use(passport.initialize());
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
+app.use('/wallet', walletRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');

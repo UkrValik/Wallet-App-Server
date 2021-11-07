@@ -41,9 +41,9 @@ const updateUserWallet = async (req, res) => {
     }
 }
 
-const deleteWallet = async (req, res) => {
+const deleteWallet = (req, res) => {
     try {
-        const result = await Wallet.deleteById(req.body.id);
+        const result = Wallet.deleteById(req.body.id);
         res.json({ success: true, result });
     } catch (err) {
         res.json({ success: false, err });

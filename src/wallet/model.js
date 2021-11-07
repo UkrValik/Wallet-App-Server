@@ -2,6 +2,7 @@
 
 const dynamoose = require('dynamoose');
 const uuid = require('uuid');
+const Transaction = require('../transaction/model.js');
 
 const Schema = dynamoose.Schema;
 
@@ -31,10 +32,6 @@ class Wallet {
                 type: Boolean,
                 required: true,
             },
-            active: {
-                type: Boolean,
-                require: true,
-            }
         });
 
         let modelName = 'wallets';
@@ -55,7 +52,7 @@ class Wallet {
     }
 
     findByUserId(userId) {
-        return this.Wallet.scan('userId').eq(userId).and().where('active').eq(true);
+        return this.Wallet.scan('userId').eq(userId);
     }
 
     updateById(newWallet) {
@@ -63,7 +60,8 @@ class Wallet {
     }
 
     deleteById(id) {
-        return this.Wallet.update({ id, active: false });
+        Transaction.deleteByWalletId(id);
+        return this.Wallet.delete(id);
     }
 }
 

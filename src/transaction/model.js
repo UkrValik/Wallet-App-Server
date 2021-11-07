@@ -66,6 +66,16 @@ class Transaction {
     updateById(newTransaction) {
         return this.Transaction.update(newTransaction);
     }
+
+    deleteById(id) {
+        return this.Transaction.delete(id);
+    }
+
+    async deleteByWalletId(walletId) {
+        const transactions = await this.findByWalletId(walletId).exec();
+        const arrayOfId = Array.from(transactions, transaction => transaction.id);
+        return this.Transaction.batchDelete(arrayOfId);
+    }
 }
 
 module.exports = new Transaction();
